@@ -41,12 +41,21 @@ const Hero = () => {
           className="text-5xl md:text-7xl font-bold mb-6 text-white tracking-tight max-w-4xl text-balance"
         >
           Strategic Solutions for the
-          <span className="relative">
-            <span className="opacity-0"> AI Solutions</span>
-            <span className="absolute left-0 text-gradient">
-              {phrases[currentIndex]}
-            </span>
-          </span>
+          <div className="relative inline-block min-w-[300px] text-left">
+            {phrases.map((phrase, index) => (
+              <div 
+                key={phrase}
+                className={`absolute left-0 text-gradient transition-opacity duration-500 ${
+                  index === currentIndex ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                {phrase}
+              </div>
+            ))}
+            <div className="opacity-0">
+              {phrases[0]}
+            </div>
+          </div>
           <br /> 
           Future
         </motion.h1>
