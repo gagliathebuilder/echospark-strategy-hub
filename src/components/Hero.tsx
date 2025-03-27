@@ -1,11 +1,12 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Wand2, Zap, Globe } from "lucide-react";
+import { ArrowRight, Wand2, Zap, Globe, Sparkles, Users, BarChart3 } from "lucide-react";
+import HoverEffectCard from "./ui/hover-effect-card";
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const phrases = ["AI Solutions", "Creator Economy", "Ad Tech"];
+  const phrases = ["AI Solutions", "Creator's Economy", "Ad Tech"];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -13,6 +14,94 @@ const Hero = () => {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
+
+  // Solution cards with hover content
+  const solutions = [
+    {
+      title: "AI Solutions",
+      description: "Building and deploying custom AI agents tailored to transform business operations and client experiences.",
+      icon: <Wand2 className="h-6 w-6 text-echo-primary" />,
+      iconClassName: "bg-echo-primary/10",
+      hoverContent: (
+        <div>
+          <h4 className="text-lg font-bold mb-3 flex items-center">
+            <Sparkles className="h-5 w-5 mr-2 text-echo-primary" />
+            AI Solutions Examples
+          </h4>
+          <ul className="space-y-2 text-white/80">
+            <li className="flex items-start">
+              <span className="h-1.5 w-1.5 rounded-full bg-echo-primary mt-2 mr-2"></span>
+              <span>Custom chatbots for customer support</span>
+            </li>
+            <li className="flex items-start">
+              <span className="h-1.5 w-1.5 rounded-full bg-echo-primary mt-2 mr-2"></span>
+              <span>AI-powered analytics dashboards</span>
+            </li>
+            <li className="flex items-start">
+              <span className="h-1.5 w-1.5 rounded-full bg-echo-primary mt-2 mr-2"></span>
+              <span>Predictive maintenance systems</span>
+            </li>
+          </ul>
+        </div>
+      )
+    },
+    {
+      title: "Creator's Economy",
+      description: "Strategic partnerships with influential creators to develop powerful, conversion-driven marketing campaigns.",
+      icon: <Zap className="h-6 w-6 text-echo-secondary" />,
+      iconClassName: "bg-echo-secondary/10",
+      hoverContent: (
+        <div>
+          <h4 className="text-lg font-bold mb-3 flex items-center">
+            <Users className="h-5 w-5 mr-2 text-echo-secondary" />
+            Creator Partnership Examples
+          </h4>
+          <ul className="space-y-2 text-white/80">
+            <li className="flex items-start">
+              <span className="h-1.5 w-1.5 rounded-full bg-echo-secondary mt-2 mr-2"></span>
+              <span>Influencer content co-creation</span>
+            </li>
+            <li className="flex items-start">
+              <span className="h-1.5 w-1.5 rounded-full bg-echo-secondary mt-2 mr-2"></span>
+              <span>Brand ambassador programs</span>
+            </li>
+            <li className="flex items-start">
+              <span className="h-1.5 w-1.5 rounded-full bg-echo-secondary mt-2 mr-2"></span>
+              <span>UGC campaign management</span>
+            </li>
+          </ul>
+        </div>
+      )
+    },
+    {
+      title: "Ad Tech Mastery",
+      description: "Expertise in programmatic advertising with a focus on emerging channels including CTV and podcast networks.",
+      icon: <Globe className="h-6 w-6 text-echo-accent" />,
+      iconClassName: "bg-echo-accent/10",
+      hoverContent: (
+        <div>
+          <h4 className="text-lg font-bold mb-3 flex items-center">
+            <BarChart3 className="h-5 w-5 mr-2 text-echo-accent" />
+            Ad Tech Solutions
+          </h4>
+          <ul className="space-y-2 text-white/80">
+            <li className="flex items-start">
+              <span className="h-1.5 w-1.5 rounded-full bg-echo-accent mt-2 mr-2"></span>
+              <span>CTV campaign optimization</span>
+            </li>
+            <li className="flex items-start">
+              <span className="h-1.5 w-1.5 rounded-full bg-echo-accent mt-2 mr-2"></span>
+              <span>Podcast ad insertion technology</span>
+            </li>
+            <li className="flex items-start">
+              <span className="h-1.5 w-1.5 rounded-full bg-echo-accent mt-2 mr-2"></span>
+              <span>Cross-channel attribution models</span>
+            </li>
+          </ul>
+        </div>
+      )
+    }
+  ];
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center items-center pt-20 overflow-hidden bg-echo-dark">
@@ -97,35 +186,16 @@ const Hero = () => {
         className="echo-container mt-24 mb-16 z-10"
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
-          <div className="glass-card-dark p-6 md:p-8 transition-all duration-300 hover:translate-y-[-5px]">
-            <div className="h-12 w-12 rounded-full bg-echo-primary/10 mb-4 flex items-center justify-center">
-              <Wand2 className="h-6 w-6 text-echo-primary" />
-            </div>
-            <h3 className="text-xl font-bold text-white mb-2">AI Solutions</h3>
-            <p className="text-white/70">
-              Building and deploying custom AI agents tailored to transform business operations and client experiences.
-            </p>
-          </div>
-          
-          <div className="glass-card-dark p-6 md:p-8 transition-all duration-300 hover:translate-y-[-5px]">
-            <div className="h-12 w-12 rounded-full bg-echo-secondary/10 mb-4 flex items-center justify-center">
-              <Zap className="h-6 w-6 text-echo-secondary" />
-            </div>
-            <h3 className="text-xl font-bold text-white mb-2">Creator Economy</h3>
-            <p className="text-white/70">
-              Strategic partnerships with influential creators to develop powerful, conversion-driven marketing campaigns.
-            </p>
-          </div>
-          
-          <div className="glass-card-dark p-6 md:p-8 transition-all duration-300 hover:translate-y-[-5px]">
-            <div className="h-12 w-12 rounded-full bg-echo-accent/10 mb-4 flex items-center justify-center">
-              <Globe className="h-6 w-6 text-echo-accent" />
-            </div>
-            <h3 className="text-xl font-bold text-white mb-2">Ad Tech Mastery</h3>
-            <p className="text-white/70">
-              Expertise in programmatic advertising with a focus on emerging channels including CTV and podcast networks.
-            </p>
-          </div>
+          {solutions.map((solution, index) => (
+            <HoverEffectCard
+              key={index}
+              title={solution.title}
+              description={solution.description}
+              icon={solution.icon}
+              iconClassName={solution.iconClassName}
+              hoverContent={solution.hoverContent}
+            />
+          ))}
         </div>
       </motion.div>
     </section>
