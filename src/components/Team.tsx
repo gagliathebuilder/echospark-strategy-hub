@@ -28,7 +28,7 @@ const Team = () => {
       id: 3,
       name: "Chris Gaglia",
       role: "Ad Tech & AI Innovator",
-      bio: "AdTech OG with a track record in CTV, Mobile, and Influencer monetization. Built products, scaled partnerships, and now diving deep into AI to create what's next.",
+      bio: "Product-driven leader in CTV, Mobile, and Influencer monetization. Now building next-gen AI solutions.",
       image: "/lovable-uploads/40856c6c-c20e-464c-ab96-d1d60c3df798.png",
       delay: 0.3
     },
