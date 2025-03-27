@@ -26,19 +26,27 @@ const Team = () => {
     },
     {
       id: 3,
-      name: "James Wilson",
-      role: "Ad Tech Specialist",
-      bio: "15+ years in programmatic advertising with specific expertise in CTV, podcasting, and emerging digital channels.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      name: "Chris Gaglia",
+      role: "Ad Tech & AI Innovator",
+      bio: "Programmatic advertising OG with deep expertise in CTV, FAST, Mobile, and data-driven strategy. Specialized now in AI-powered monetization and strategic partnerships.",
+      image: "/lovable-uploads/40856c6c-c20e-464c-ab96-d1d60c3df798.png",
       delay: 0.3
     },
     {
       id: 4,
+      name: "James Wilson",
+      role: "Ad Tech Specialist",
+      bio: "15+ years in programmatic advertising with specific expertise in CTV, podcasting, and emerging digital channels.",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      delay: 0.4
+    },
+    {
+      id: 5,
       name: "Maya Patel",
       role: "Digital Transformation Lead",
       bio: "Specialized in guiding enterprises through technology-enabled business evolution with a focus on data strategy.",
       image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=761&q=80",
-      delay: 0.4
+      delay: 0.5
     }
   ];
 
