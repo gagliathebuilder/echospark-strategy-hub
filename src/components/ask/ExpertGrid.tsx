@@ -37,49 +37,51 @@ const ExpertGrid = ({ onSelectExpert, selectedExpert }: ExpertGridProps) => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {experts.map((expert) => (
-            <HoverEffectCard
-              key={expert.id}
-              title={expert.name}
-              description={expert.role}
-              icon={<Briefcase />}
-              iconClassName="bg-echo-muted/30 text-echo-secondary"
-              hoverContent={
-                <div className="flex flex-col">
-                  <p className="text-sm text-white/80 mb-4">{expert.bio}</p>
-                  <p className="text-xs text-white/60 italic mb-3">"{expert.tone}"</p>
-                  <button
-                    onClick={() => onSelectExpert(expert)}
-                    className={`button-echo-primary py-2 px-4 rounded-md w-full ${
-                      selectedExpert?.id === expert.id
-                        ? "bg-echo-secondary text-echo-dark"
-                        : ""
-                    }`}
-                  >
-                    {selectedExpert?.id === expert.id
-                      ? "Currently Selected"
-                      : "Chat with " + expert.name}
-                  </button>
-                </div>
-              }
-            >
-              <div 
-                onClick={() => onSelectExpert(expert)}
-                className={`flex items-center space-x-4 cursor-pointer ${
-                  selectedExpert?.id === expert.id
-                    ? "bg-echo-muted/20 p-2 rounded-lg"
-                    : ""
-                }`}
+            <div key={expert.id} className="h-full">
+              <HoverEffectCard
+                key={expert.id}
+                title={expert.name}
+                description={expert.role}
+                icon={<Briefcase />}
+                iconClassName="bg-echo-muted/30 text-echo-secondary"
+                hoverContent={
+                  <div className="flex flex-col">
+                    <p className="text-sm text-white/80 mb-4">{expert.bio}</p>
+                    <p className="text-xs text-white/60 italic mb-3">"{expert.tone}"</p>
+                    <button
+                      onClick={() => onSelectExpert(expert)}
+                      className={`button-echo-primary py-2 px-4 rounded-md w-full ${
+                        selectedExpert?.id === expert.id
+                          ? "bg-echo-secondary text-echo-dark"
+                          : ""
+                      }`}
+                    >
+                      {selectedExpert?.id === expert.id
+                        ? "Currently Selected"
+                        : "Chat with " + expert.name}
+                    </button>
+                  </div>
+                }
               >
-                <Avatar className="h-16 w-16 border-2 border-echo-muted/30">
-                  <AvatarImage src={expert.avatar} alt={expert.name} />
-                  <AvatarFallback>{expert.name.substring(0, 2)}</AvatarFallback>
-                </Avatar>
-                <div>
-                  <h3 className="text-lg font-semibold text-white">{expert.name}</h3>
-                  <p className="text-sm text-echo-secondary">{expert.role}</p>
+                <div 
+                  onClick={() => onSelectExpert(expert)}
+                  className={`flex items-center space-x-4 cursor-pointer ${
+                    selectedExpert?.id === expert.id
+                      ? "bg-echo-muted/20 p-2 rounded-lg"
+                      : ""
+                  }`}
+                >
+                  <Avatar className="h-16 w-16 border-2 border-echo-muted/30">
+                    <AvatarImage src={expert.avatar} alt={expert.name} />
+                    <AvatarFallback>{expert.name.substring(0, 2)}</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <h3 className="text-lg font-semibold text-white">{expert.name}</h3>
+                    <p className="text-sm text-echo-secondary">{expert.role}</p>
+                  </div>
                 </div>
-              </div>
-            </HoverEffectCard>
+              </HoverEffectCard>
+            </div>
           ))}
         </div>
       </div>
