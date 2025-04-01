@@ -9,6 +9,7 @@ interface HoverEffectCardProps {
   icon: ReactNode;
   iconClassName: string;
   hoverContent: ReactNode;
+  children?: ReactNode; // Add children as an optional prop
 }
 
 const HoverEffectCard = ({
@@ -17,6 +18,7 @@ const HoverEffectCard = ({
   icon,
   iconClassName,
   hoverContent,
+  children,
 }: HoverEffectCardProps) => {
   return (
     <HoverCard openDelay={200} closeDelay={100}>
@@ -27,6 +29,7 @@ const HoverEffectCard = ({
           </div>
           <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
           <p className="text-white/70">{description}</p>
+          {children}
         </div>
       </HoverCardTrigger>
       <HoverCardContent className="w-80 bg-echo-dark/95 border border-echo-muted/20 backdrop-blur-lg p-6 text-white shadow-xl">
