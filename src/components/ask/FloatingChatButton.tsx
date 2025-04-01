@@ -24,8 +24,20 @@ const FloatingChatButton = ({ expert, onClick }: FloatingChatButtonProps) => {
     };
     
     window.addEventListener("scroll", handleScroll);
+    // Initial check
+    handleScroll();
+    
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
+  const handleClick = () => {
+    // Scroll to chat panel with smooth behavior
+    const chatPanel = document.getElementById("chat-panel");
+    if (chatPanel) {
+      chatPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    onClick();
+  };
   
   return (
     <AnimatePresence>
@@ -35,7 +47,7 @@ const FloatingChatButton = ({ expert, onClick }: FloatingChatButtonProps) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
           transition={{ duration: 0.3 }}
-          onClick={onClick}
+          onClick={handleClick}
           className="fixed bottom-6 right-6 bg-echo-primary shadow-lg rounded-full p-3 flex items-center space-x-2 z-50 hover:bg-echo-primary/90 transition-colors"
         >
           <Avatar className="h-8 w-8 border border-white/20">

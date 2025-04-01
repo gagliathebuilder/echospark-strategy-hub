@@ -122,11 +122,11 @@ const Team = () => {
               transition={{ duration: 0.5, delay: member.delay }}
               className="glass-card-dark overflow-hidden transition-all duration-300 hover:translate-y-[-5px] group"
             >
-              <div className="relative h-80 w-full overflow-hidden">
+              <div className="relative h-[300px] w-full overflow-hidden">
                 <img
                   src={member.image}
                   alt={member.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-echo-dark via-transparent to-transparent"></div>

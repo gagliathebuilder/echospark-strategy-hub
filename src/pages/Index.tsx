@@ -59,8 +59,9 @@ const Index = () => {
       <Navbar />
       <Hero />
       <Services />
+      <Team />
       
-      {/* New CTA section directing to Ask page */}
+      {/* New CTA section directing to Ask page - Moved after Team section */}
       <section className="py-16 bg-gradient-to-r from-echo-dark/90 to-echo-dark/80">
         <div className="echo-container">
           <motion.div 
@@ -102,7 +103,6 @@ const Index = () => {
         </div>
       </section>
       
-      <Team />
       <CaseStudies />
       <Contact />
       <Footer />

@@ -11,6 +11,18 @@ interface ExpertGridProps {
 }
 
 const ExpertGrid = ({ onSelectExpert, selectedExpert }: ExpertGridProps) => {
+  const handleExpertSelect = (expert: Expert) => {
+    onSelectExpert(expert);
+    
+    // Scroll to chat panel with smooth behavior after a short delay
+    setTimeout(() => {
+      const chatPanel = document.getElementById("chat-panel");
+      if (chatPanel) {
+        chatPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  };
+  
   return (
     <section id="experts" className="py-16 bg-echo-dark/95">
       <div className="echo-container">
@@ -52,13 +64,13 @@ const ExpertGrid = ({ onSelectExpert, selectedExpert }: ExpertGridProps) => {
                     ? "ring-2 ring-echo-secondary shadow-[0_0_15px_rgba(155,135,245,0.5)]" 
                     : "ring-0 hover:shadow-[0_0_10px_rgba(155,135,245,0.3)]"
                 }`}
-                onClick={() => onSelectExpert(expert)}
+                onClick={() => handleExpertSelect(expert)}
               >
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-72 overflow-hidden">
                   <img 
                     src={expert.avatar} 
                     alt={expert.name} 
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-echo-dark via-transparent to-transparent"></div>
                   
