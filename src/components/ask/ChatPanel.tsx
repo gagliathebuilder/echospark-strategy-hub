@@ -5,8 +5,8 @@ import { Expert, Message } from "@/types/expert";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { SendHorizonal, User } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { SendHorizonal, User, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -121,22 +121,22 @@ const ChatPanel = ({ expert }: ChatPanelProps) => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="glass-card-dark overflow-hidden"
+          className="relative overflow-hidden rounded-xl shadow-2xl border border-echo-muted/20 bg-echo-dark/80 backdrop-blur-lg"
         >
           {/* Chat header */}
-          <div className="p-4 border-b border-echo-muted/20 flex items-center space-x-4">
-            <Avatar className="h-10 w-10">
+          <div className="p-6 border-b border-echo-muted/20 flex items-center space-x-4 bg-echo-dark/90">
+            <Avatar className="h-14 w-14 border-2 border-echo-secondary/30">
               <AvatarImage src={expert.avatar} alt={expert.name} />
               <AvatarFallback>{expert.name.substring(0, 2)}</AvatarFallback>
             </Avatar>
             <div>
-              <h3 className="text-lg font-semibold text-white">{expert.name}</h3>
-              <p className="text-sm text-echo-secondary">{expert.role}</p>
+              <h3 className="text-xl font-bold text-white">{expert.name}</h3>
+              <p className="text-echo-secondary">{expert.role}</p>
             </div>
           </div>
 
           {/* Chat messages */}
-          <div className="p-4 h-[400px] overflow-y-auto flex flex-col space-y-4">
+          <div className="p-6 h-[450px] overflow-y-auto flex flex-col space-y-6 bg-gradient-to-b from-echo-dark/60 to-echo-dark/90">
             <AnimatePresence>
               {messages.map((message) => (
                 <motion.div
@@ -144,25 +144,26 @@ const ChatPanel = ({ expert }: ChatPanelProps) => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
                   className={`flex ${
                     message.sender === "user" ? "justify-end" : "justify-start"
                   }`}
                 >
                   <div
-                    className={`max-w-[80%] ${
+                    className={`max-w-[85%] ${
                       message.sender === "user"
-                        ? "bg-echo-primary text-white rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl"
-                        : "bg-echo-muted/30 text-white rounded-tl-2xl rounded-tr-2xl rounded-br-2xl"
-                    } p-4`}
+                        ? "bg-echo-primary/90 text-white rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl shadow-md"
+                        : "bg-echo-muted/40 text-white rounded-tl-2xl rounded-tr-2xl rounded-br-2xl shadow-md border border-echo-muted/20"
+                    } p-5`}
                   >
                     <div className="flex items-center space-x-2 mb-2">
                       {message.sender === "expert" ? (
-                        <Avatar className="h-6 w-6">
+                        <Avatar className="h-8 w-8 border border-echo-secondary/30">
                           <AvatarImage src={expert.avatar} alt={expert.name} />
                           <AvatarFallback>{expert.name.substring(0, 2)}</AvatarFallback>
                         </Avatar>
                       ) : (
-                        <div className="h-6 w-6 rounded-full bg-echo-muted/30 flex items-center justify-center">
+                        <div className="h-8 w-8 rounded-full bg-echo-primary/70 flex items-center justify-center">
                           <User className="h-4 w-4 text-white" />
                         </div>
                       )}
@@ -170,8 +171,11 @@ const ChatPanel = ({ expert }: ChatPanelProps) => {
                         {message.sender === "user" ? "You" : expert.name}
                       </span>
                     </div>
+                    
                     {/* Format message with line breaks */}
-                    <div className="whitespace-pre-line">{message.text}</div>
+                    <div className="whitespace-pre-line text-white/90 leading-relaxed">
+                      {message.text}
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -184,9 +188,9 @@ const ChatPanel = ({ expert }: ChatPanelProps) => {
                   exit={{ opacity: 0, y: -10 }}
                   className="flex justify-start"
                 >
-                  <div className="bg-echo-muted/30 text-white rounded-tl-2xl rounded-tr-2xl rounded-br-2xl p-4">
+                  <div className="bg-echo-muted/40 text-white rounded-2xl p-4 border border-echo-muted/20 shadow-md">
                     <div className="flex items-center space-x-2">
-                      <Avatar className="h-6 w-6">
+                      <Avatar className="h-8 w-8 border border-echo-secondary/30">
                         <AvatarImage src={expert.avatar} alt={expert.name} />
                         <AvatarFallback>{expert.name.substring(0, 2)}</AvatarFallback>
                       </Avatar>
@@ -207,19 +211,29 @@ const ChatPanel = ({ expert }: ChatPanelProps) => {
                   animate={{ opacity: 1, y: 0 }}
                   className="flex justify-start"
                 >
-                  <Card className="max-w-[80%] bg-echo-muted/10 border border-echo-secondary/30 p-4 space-y-3">
-                    <h4 className="text-white font-semibold">{expert.cta}</h4>
-                    <div className="flex gap-2">
-                      <Input
-                        type="email"
-                        placeholder="Your email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="bg-echo-muted/20 text-white border-echo-muted/30"
-                      />
-                      <Button onClick={handleSubmitEmail} className="bg-echo-secondary text-echo-dark hover:bg-echo-secondary/90">
-                        Send
-                      </Button>
+                  <Card className="max-w-[85%] bg-gradient-to-br from-echo-secondary/10 to-echo-primary/10 border border-echo-secondary/30 p-5 space-y-4 rounded-xl shadow-lg">
+                    <div className="flex items-start space-x-3">
+                      <AlertCircle className="h-5 w-5 text-echo-secondary mt-0.5" />
+                      <div>
+                        <h4 className="text-white font-semibold text-lg mb-2">{expert.cta}</h4>
+                        <p className="text-white/70 text-sm mb-4">[Send it to me]</p>
+                        
+                        <div className="flex gap-2">
+                          <Input
+                            type="email"
+                            placeholder="Your email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="bg-echo-muted/20 text-white border-echo-muted/30 focus:border-echo-secondary/50 focus:ring-1 focus:ring-echo-secondary/50"
+                          />
+                          <Button 
+                            onClick={handleSubmitEmail} 
+                            className="bg-echo-secondary text-echo-dark hover:bg-echo-secondary/90 font-medium"
+                          >
+                            Send
+                          </Button>
+                        </div>
+                      </div>
                     </div>
                   </Card>
                 </motion.div>
@@ -232,8 +246,8 @@ const ChatPanel = ({ expert }: ChatPanelProps) => {
                   animate={{ opacity: 1, y: 0 }}
                   className="flex justify-start"
                 >
-                  <div className="max-w-[80%] bg-echo-secondary/20 text-white rounded-2xl p-4 border border-echo-secondary/30">
-                    <p>Thanks for your interest! A member of the EchoSpark team will be in touch soon.</p>
+                  <div className="max-w-[85%] bg-echo-secondary/20 text-white rounded-2xl p-5 border border-echo-secondary/30 shadow-md">
+                    <p className="text-white/90">Thanks for your interest! A member of the EchoSpark team will be in touch soon.</p>
                   </div>
                 </motion.div>
               )}
@@ -242,7 +256,7 @@ const ChatPanel = ({ expert }: ChatPanelProps) => {
           </div>
 
           {/* Chat input */}
-          <div className="p-4 border-t border-echo-muted/20">
+          <div className="p-6 border-t border-echo-muted/20 bg-echo-dark/80">
             <div className="flex space-x-2">
               <Input
                 type="text"
@@ -251,15 +265,20 @@ const ChatPanel = ({ expert }: ChatPanelProps) => {
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={handleKeyDown}
                 disabled={isTyping || submitted}
-                className="bg-echo-muted/20 text-white border-echo-muted/30"
+                className="bg-echo-muted/20 text-white border-echo-muted/30 focus:border-echo-primary/50 focus:ring-1 focus:ring-echo-primary/50 py-6"
               />
               <Button
                 onClick={handleSendMessage}
                 disabled={!inputValue.trim() || isTyping || submitted}
-                className="bg-echo-primary text-white hover:bg-echo-primary/90"
+                className="bg-echo-primary text-white hover:bg-echo-primary/90 px-6"
+                size="icon"
               >
                 <SendHorizonal className="h-5 w-5" />
               </Button>
+            </div>
+
+            <div className="mt-3 text-center">
+              <p className="text-white/50 text-xs">This is a simulated conversation with a fictional EchoSpark expert</p>
             </div>
           </div>
         </motion.div>
