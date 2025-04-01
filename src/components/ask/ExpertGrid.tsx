@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { experts, Expert } from "@/types/expert";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Briefcase, Users } from "lucide-react";
+import { Briefcase, Users, MessageSquare } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 interface ExpertGridProps {
@@ -49,18 +49,25 @@ const ExpertGrid = ({ onSelectExpert, selectedExpert }: ExpertGridProps) => {
               <Card 
                 className={`h-full overflow-hidden cursor-pointer border-0 shadow-lg hover:shadow-xl transition-all duration-300 ${
                   selectedExpert?.id === expert.id 
-                    ? "ring-2 ring-echo-secondary" 
-                    : "ring-0"
+                    ? "ring-2 ring-echo-secondary shadow-[0_0_15px_rgba(155,135,245,0.5)]" 
+                    : "ring-0 hover:shadow-[0_0_10px_rgba(155,135,245,0.3)]"
                 }`}
                 onClick={() => onSelectExpert(expert)}
               >
-                <div className="relative h-56 overflow-hidden">
+                <div className="relative h-64 overflow-hidden">
                   <img 
                     src={expert.avatar} 
                     alt={expert.name} 
                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-echo-dark via-transparent to-transparent"></div>
+                  
+                  {selectedExpert?.id === expert.id && (
+                    <div className="absolute top-3 right-3 bg-echo-secondary text-echo-dark px-3 py-1 rounded-full text-sm font-medium flex items-center animate-pulse">
+                      <MessageSquare className="h-3.5 w-3.5 mr-1" />
+                      Currently Chatting
+                    </div>
+                  )}
                 </div>
                 
                 <CardContent className="p-6 bg-echo-dark/90 border-t border-echo-muted/20">
@@ -84,13 +91,18 @@ const ExpertGrid = ({ onSelectExpert, selectedExpert }: ExpertGridProps) => {
                     <button
                       className={`w-full py-2 px-4 rounded-md transition-colors ${
                         selectedExpert?.id === expert.id
-                          ? "bg-echo-secondary text-echo-dark font-medium"
+                          ? "bg-echo-secondary text-echo-dark font-medium relative overflow-hidden"
                           : "bg-echo-muted/20 text-white hover:bg-echo-muted/30"
                       }`}
                     >
-                      {selectedExpert?.id === expert.id 
-                        ? "Currently Chatting" 
-                        : "Chat with " + expert.name}
+                      {selectedExpert?.id === expert.id ? (
+                        <>
+                          Currently Chatting
+                          <div className="absolute inset-0 bg-white/20 animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite]"></div>
+                        </>
+                      ) : (
+                        <>Chat with {expert.name}</>
+                      )}
                     </button>
                   </div>
                 </CardContent>
