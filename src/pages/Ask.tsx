@@ -24,6 +24,11 @@ const Ask = () => {
       }, 100);
     }
   }, [selectedExpert]);
+  
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>

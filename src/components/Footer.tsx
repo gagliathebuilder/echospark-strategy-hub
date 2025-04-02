@@ -1,7 +1,11 @@
 
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Send } from "lucide-react";
+import { useState } from "react";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -9,9 +13,61 @@ const Footer = () => {
     });
   };
 
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email && email.includes('@')) {
+      setSubscribed(true);
+      setEmail("");
+      // In a real app, you would send this to your backend
+      console.log("Subscribed with email:", email);
+      
+      // Reset state after 5 seconds
+      setTimeout(() => {
+        setSubscribed(false);
+      }, 5000);
+    }
+  };
+
   return (
     <footer className="bg-echo-dark pt-16 pb-8">
       <div className="echo-container">
+        {/* Newsletter Subscription */}
+        <div className="mb-12 pb-12 border-b border-echo-muted/20">
+          <div className="max-w-3xl mx-auto text-center">
+            <h3 className="text-2xl font-bold text-white mb-3">Stay Updated with <span className="text-gradient">EchoSpark</span></h3>
+            <p className="text-white/70 mb-6">
+              Subscribe to our newsletter for the latest insights on AI strategy, creator economy trends, and digital transformation.
+            </p>
+            
+            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+              <input 
+                type="email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Your email address" 
+                className="flex-grow px-4 py-3 rounded-md bg-echo-muted/20 border border-echo-muted/30 text-white focus:outline-none focus:ring-2 focus:ring-echo-secondary"
+                required
+              />
+              <button 
+                type="submit"
+                className="px-6 py-3 bg-echo-secondary text-echo-dark font-medium rounded-md hover:bg-echo-secondary/90 transition-colors flex items-center justify-center"
+              >
+                {subscribed ? "Subscribed!" : (
+                  <>
+                    Subscribe <Send className="ml-2 h-4 w-4" />
+                  </>
+                )}
+              </button>
+            </form>
+            
+            {subscribed && (
+              <p className="text-echo-secondary mt-3 animate-fade-in">
+                Thanks for subscribing! We'll be in touch soon.
+              </p>
+            )}
+          </div>
+        </div>
+        
         <div className="flex flex-col md:flex-row justify-between mb-12 gap-10">
           <div className="md:w-1/3">
             <div className="flex items-center space-x-2 text-xl font-heading font-bold mb-4">
