@@ -60,7 +60,7 @@ const Ask = () => {
           <ExpertGrid onSelectExpert={setSelectedExpert} selectedExpert={selectedExpert} />
           
           {/* Chat panel with ref for scrolling */}
-          <div ref={chatRef}>
+          <div ref={chatRef} id="chat-panel">
             {selectedExpert && <ChatPanel expert={selectedExpert} />}
           </div>
           
