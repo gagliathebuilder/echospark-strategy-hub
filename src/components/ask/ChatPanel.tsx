@@ -1,5 +1,5 @@
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, RefObject } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Expert, Message } from "@/types/expert";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -13,9 +13,10 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface ChatPanelProps {
   expert: Expert;
+  chatRef?: RefObject<HTMLDivElement>;
 }
 
-const ChatPanel = ({ expert }: ChatPanelProps) => {
+const ChatPanel = ({ expert, chatRef }: ChatPanelProps) => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: uuidv4(),
@@ -65,6 +66,11 @@ const ChatPanel = ({ expert }: ChatPanelProps) => {
     setMessages(prev => [...prev, userMessage]);
     setInputValue("");
     setIsTyping(true);
+
+    // Ensure chat panel is visible
+    if (chatRef?.current) {
+      chatRef.current.scrollIntoView({ behavior: "smooth" });
+    }
 
     // Simulate expert typing
     setTimeout(() => {

@@ -60,8 +60,8 @@ const Ask = () => {
           <ExpertGrid onSelectExpert={setSelectedExpert} selectedExpert={selectedExpert} />
           
           {/* Chat panel with ref for scrolling */}
-          <div ref={chatRef}>
-            {selectedExpert && <ChatPanel expert={selectedExpert} />}
+          <div ref={chatRef} id="chat-panel">
+            {selectedExpert && <ChatPanel expert={selectedExpert} chatRef={chatRef} />}
           </div>
           
           <FinalCTA />

@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Wand2, Zap, Globe, Sparkles, Users, BarChart3 } from "lucide-react";
+import { ArrowRight, Wand2, Zap, Globe, Sparkles, Users, BarChart3, Bot, Cpu, Brain } from "lucide-react";
 import HoverEffectCard from "./ui/hover-effect-card";
 
 const Hero = () => {
@@ -120,7 +120,7 @@ const Hero = () => {
           className="inline-flex items-center px-3 py-1 mb-8 rounded-full bg-echo-muted/30 border border-echo-muted/20 backdrop-blur-sm"
         >
           <span className="animate-pulse mr-2 h-2 w-2 rounded-full bg-echo-secondary"></span>
-          <span className="text-xs font-medium text-white/80">Future Forward Advisory</span>
+          <span className="text-xs font-medium text-white/80">AI-Powered Business Transformation</span>
         </motion.div>
 
         <motion.h1
@@ -153,9 +153,47 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="text-lg md:text-xl text-white/70 mb-10 max-w-2xl text-balance"
         >
-          A collective of industry experts deploying cutting-edge strategies and solutions 
-          for businesses navigating the digital frontier.
+          We help businesses leverage AI to automate processes, enhance team capabilities, 
+          and create competitive advantages through custom AI solutions and strategic implementation.
         </motion.p>
+
+        {/* AI Integration USP Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10 w-full max-w-3xl"
+        >
+          <div className="flex items-center gap-3 bg-echo-muted/20 p-4 rounded-lg border border-echo-muted/10">
+            <div className="bg-echo-primary/10 p-2 rounded-full">
+              <Brain className="h-5 w-5 text-echo-primary" />
+            </div>
+            <div className="text-left">
+              <h3 className="font-medium text-white">Custom AI Training</h3>
+              <p className="text-sm text-white/70">Tailored to your industry & data</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-3 bg-echo-muted/20 p-4 rounded-lg border border-echo-muted/10">
+            <div className="bg-echo-secondary/10 p-2 rounded-full">
+              <Bot className="h-5 w-5 text-echo-secondary" />
+            </div>
+            <div className="text-left">
+              <h3 className="font-medium text-white">AI Team Integration</h3>
+              <p className="text-sm text-white/70">Enhance your workforce capabilities</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-3 bg-echo-muted/20 p-4 rounded-lg border border-echo-muted/10">
+            <div className="bg-echo-accent/10 p-2 rounded-full">
+              <Cpu className="h-5 w-5 text-echo-accent" />
+            </div>
+            <div className="text-left">
+              <h3 className="font-medium text-white">Intelligent Systems</h3>
+              <p className="text-sm text-white/70">Automate complex processes</p>
+            </div>
+          </div>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
