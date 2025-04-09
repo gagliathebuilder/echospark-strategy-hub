@@ -1,9 +1,10 @@
 
 // This file handles the OpenAI API integration
 import { Expert } from "@/types/expert";
+import { toast } from "@/components/ui/use-toast";
 
-// OpenAI API key (this should be stored securely in a production environment)
-const OPENAI_API_KEY = 'sk-gEXxbZwN_HX0f_4AgJi9-e-yrAcHB6cpittptr3P6xWMsffa6iN_7aAXRGN-wRzQnLjb97VoVbT3BlbkFJGxLyG883pxGTzZzkxw4Zr3rCbVTb3jfaqskE02ziyN0Yy1LKIsteVp01G0Aug8i8bl5ANzxfQA';
+// OpenAI API key
+const OPENAI_API_KEY = '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';
 
 /**
  * Generates a response from OpenAI based on the expert persona and user query
@@ -19,7 +20,7 @@ export const generateAIResponse = async (expert: Expert, userQuery: string): Pro
         'Authorization': `Bearer ${OPENAI_API_KEY}`
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',  // Using a more reliable model
+        model: 'gpt-4',  // Using gpt-4 instead of gpt-4o-mini
         messages: [
           {
             role: 'system',
@@ -38,13 +39,19 @@ export const generateAIResponse = async (expert: Expert, userQuery: string): Pro
     if (!response.ok) {
       const errorData = await response.json();
       console.error('API response error:', errorData);
-      throw new Error(`API error: ${response.status}`);
+      throw new Error(`API error: ${response.status}: ${errorData.error?.message || 'Unknown error'}`);
     }
 
     const data = await response.json();
     return data.choices[0].message.content;
   } catch (error) {
     console.error('Error generating AI response:', error);
-    return expert.sampleAnswer; // Fallback to sample answer
+    toast({
+      title: "AI Response Error",
+      description: "Could not generate AI response. Please try again later.",
+      variant: "destructive",
+    });
+    // Don't return a fallback answer, to avoid misleading the user
+    throw error;
   }
 };

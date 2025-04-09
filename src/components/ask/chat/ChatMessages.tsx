@@ -32,18 +32,23 @@ const ChatMessages = ({
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to bottom when messages change
+  // Improved scroll behavior
   useEffect(() => {
     if (messagesEndRef.current) {
-      // Small delay to ensure content is rendered before scrolling
+      // More aggressive scrolling to ensure visibility
       setTimeout(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+        
+        // Double check scroll position after initial scroll
+        setTimeout(() => {
+          messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+        }, 300);
       }, 100);
     }
   }, [messages, isTyping, showCta, submitted]);
 
   return (
-    <ScrollArea className="h-[450px] flex-grow" ref={scrollAreaRef}>
+    <ScrollArea className="h-[450px] flex-grow">
       <div className="p-6 flex flex-col space-y-6">
         <AnimatePresence mode="popLayout">
           {messages.map((message) => (

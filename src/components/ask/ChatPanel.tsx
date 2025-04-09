@@ -43,6 +43,16 @@ const ChatPanel = ({ expert, chatRef }: ChatPanelProps) => {
     setSubmitted(false);
   }, [expert]);
 
+  // Ensure the chat panel is visible when mounted
+  useEffect(() => {
+    // Scroll to chat panel when it's mounted
+    if (chatRef?.current) {
+      setTimeout(() => {
+        chatRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+  }, [chatRef]);
+
   const handleSendMessage = async (inputValue: string) => {
     // Add user message
     const userMessage: Message = {
@@ -94,7 +104,7 @@ const ChatPanel = ({ expert, chatRef }: ChatPanelProps) => {
   };
 
   return (
-    <section id="chat-panel" className="py-16 bg-gradient-to-b from-echo-dark/90 to-echo-dark/95">
+    <section id="chat-panel" className="py-10 bg-gradient-to-b from-echo-dark/90 to-echo-dark/95">
       <div className="echo-container max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

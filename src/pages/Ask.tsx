@@ -16,11 +16,17 @@ const Ask = () => {
   const [selectedExpert, setSelectedExpert] = useState<Expert | null>(null);
   const chatRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to chat when expert is selected
+  // Improved scroll behavior when expert is selected
   useEffect(() => {
     if (selectedExpert && chatRef.current) {
+      // More aggressive scrolling with multiple attempts
       setTimeout(() => {
-        chatRef.current?.scrollIntoView({ behavior: "smooth" });
+        chatRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        
+        // Second attempt to ensure visibility
+        setTimeout(() => {
+          chatRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 300);
       }, 100);
     }
   }, [selectedExpert]);
@@ -56,14 +62,14 @@ const Ask = () => {
           className="flex-grow"
         >
           <AskHero />
-          <HowItWorks />
-          <ExpertGrid onSelectExpert={setSelectedExpert} selectedExpert={selectedExpert} />
           
-          {/* Chat panel with ref for scrolling */}
-          <div ref={chatRef} id="chat-panel">
+          {/* Move chat panel higher in the DOM to make it appear above the fold when selected */}
+          <div ref={chatRef} id="chat-panel" className="scroll-mt-24">
             {selectedExpert && <ChatPanel expert={selectedExpert} chatRef={chatRef} />}
           </div>
           
+          <HowItWorks />
+          <ExpertGrid onSelectExpert={setSelectedExpert} selectedExpert={selectedExpert} />
           <FinalCTA />
         </motion.main>
         

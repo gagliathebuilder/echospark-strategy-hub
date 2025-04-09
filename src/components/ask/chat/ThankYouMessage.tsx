@@ -17,7 +17,7 @@ const ThankYouMessage = () => {
         </div>
         <p className="text-white/90">
           Thanks for your interest! A member of the EchoSpark team will be in touch soon.
-          Feel free to check out our contact form for more detailed inquiries.
+          Visit our contact page for more detailed inquiries.
         </p>
       </div>
     </motion.div>
