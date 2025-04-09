@@ -3,6 +3,12 @@ import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Send, Mail, MapPin, Phone } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { createClient } from '@supabase/supabase-js';
+
+// Initialize Supabase client
+const supabaseUrl = 'https://YOUR_SUPABASE_URL.supabase.co';
+const supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY';
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 const Contact = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -11,33 +17,62 @@ const Contact = () => {
     name: "",
     email: "",
     company: "",
-    message: ""
+    message: "",
+    serviceInterest: "",
+    budget: ""
   });
   const { toast } = useToast();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormState((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formState);
     
-    // Simulate form submission
-    toast({
-      title: "Message sent!",
-      description: "We've received your inquiry and will be in touch soon.",
-      duration: 5000,
-    });
-    
-    // Clear form
-    setFormState({
-      name: "",
-      email: "",
-      company: "",
-      message: ""
-    });
+    try {
+      // Submit data to Supabase
+      const { error } = await supabase
+        .from('contacts')
+        .insert([
+          { 
+            name: formState.name,
+            email: formState.email,
+            company: formState.company,
+            message: formState.message,
+            service_interest: formState.serviceInterest,
+            budget: formState.budget,
+            timestamp: new Date()
+          }
+        ]);
+      
+      if (error) throw error;
+      
+      toast({
+        title: "Message sent!",
+        description: "We've received your inquiry and will be in touch soon.",
+        duration: 5000,
+      });
+      
+      // Clear form
+      setFormState({
+        name: "",
+        email: "",
+        company: "",
+        message: "",
+        serviceInterest: "",
+        budget: ""
+      });
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      toast({
+        title: "Error",
+        description: "There was a problem sending your message. Please try again.",
+        variant: "destructive",
+        duration: 5000,
+      });
+    }
   };
 
   useEffect(() => {
@@ -242,6 +277,46 @@ const Contact = () => {
                     className="w-full px-4 py-3 bg-echo-muted/50 border border-echo-muted/30 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-echo-primary focus:border-transparent"
                     placeholder="Your company name"
                   />
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="serviceInterest" className="block text-white font-medium mb-2">
+                      What are you interested in?
+                    </label>
+                    <select
+                      id="serviceInterest"
+                      name="serviceInterest"
+                      value={formState.serviceInterest}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-echo-muted/50 border border-echo-muted/30 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-echo-primary focus:border-transparent"
+                    >
+                      <option value="">Select an option</option>
+                      <option value="AI Development">AI Development</option>
+                      <option value="Strategic Guidance">Strategic Guidance</option>
+                      <option value="Consulting">Consulting</option>
+                      <option value="Advertising">Advertising</option>
+                      <option value="Creator Economy">Creator Economy</option>
+                    </select>
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="budget" className="block text-white font-medium mb-2">
+                      Estimated Budget
+                    </label>
+                    <select
+                      id="budget"
+                      name="budget"
+                      value={formState.budget}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-echo-muted/50 border border-echo-muted/30 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-echo-primary focus:border-transparent"
+                    >
+                      <option value="">Select a budget range</option>
+                      <option value="$10K">$10,000</option>
+                      <option value="$25K">$25,000</option>
+                      <option value="$50K+">$50,000+</option>
+                    </select>
+                  </div>
                 </div>
                 
                 <div>

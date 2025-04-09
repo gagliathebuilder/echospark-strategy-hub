@@ -21,8 +21,6 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 const CtaForm = ({ expertName, ctaMessage, onSubmit }: CtaFormProps) => {
   const [email, setEmail] = useState("");
-  const [serviceInterest, setServiceInterest] = useState<string>("");
-  const [budget, setBudget] = useState<string>("");
 
   const handleSubmitEmail = async () => {
     // Simple email validation
@@ -39,9 +37,7 @@ const CtaForm = ({ expertName, ctaMessage, onSubmit }: CtaFormProps) => {
         .insert([
           { 
             email, 
-            expert_name: expertName, 
-            service_interest: serviceInterest,
-            budget: budget,
+            expert_name: expertName,
             timestamp: new Date()
           }
         ]);
@@ -77,36 +73,6 @@ const CtaForm = ({ expertName, ctaMessage, onSubmit }: CtaFormProps) => {
                 onChange={(e) => setEmail(e.target.value)}
                 className="bg-echo-muted/20 text-white border-echo-muted/30 focus:border-echo-secondary/50 focus:ring-1 focus:ring-echo-secondary/50"
               />
-              
-              <div>
-                <label className="block text-white text-sm mb-2">What are you interested in?</label>
-                <select
-                  value={serviceInterest}
-                  onChange={(e) => setServiceInterest(e.target.value)}
-                  className="w-full bg-echo-muted/20 text-white border-echo-muted/30 focus:border-echo-secondary/50 focus:ring-1 focus:ring-echo-secondary/50 rounded-md p-2"
-                >
-                  <option value="">Select an option</option>
-                  <option value="AI Development">AI Development</option>
-                  <option value="Strategic Guidance">Strategic Guidance</option>
-                  <option value="Consulting">Consulting</option>
-                  <option value="Advertising">Advertising</option>
-                  <option value="Creator Economy">Creator Economy</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-white text-sm mb-2">Estimated Budget</label>
-                <select
-                  value={budget}
-                  onChange={(e) => setBudget(e.target.value)}
-                  className="w-full bg-echo-muted/20 text-white border-echo-muted/30 focus:border-echo-secondary/50 focus:ring-1 focus:ring-echo-secondary/50 rounded-md p-2"
-                >
-                  <option value="">Select a budget range</option>
-                  <option value="$10K">$10,000</option>
-                  <option value="$25K">$25,000</option>
-                  <option value="$50K+">$50,000+</option>
-                </select>
-              </div>
 
               <Button 
                 onClick={handleSubmitEmail} 
