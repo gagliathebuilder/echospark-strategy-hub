@@ -10,11 +10,18 @@ import { SendHorizonal, User, AlertCircle, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { v4 as uuidv4 } from 'uuid';
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { createClient } from '@supabase/supabase-js';
 
 interface ChatPanelProps {
   expert: Expert;
   chatRef?: RefObject<HTMLDivElement>;
 }
+
+// Initialize Supabase client - this is just the client-side portion
+// The actual API key should be used in a secure server environment
+const supabaseUrl = 'https://YOUR_SUPABASE_URL.supabase.co';
+const supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY';
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 const ChatPanel = ({ expert, chatRef }: ChatPanelProps) => {
   const [messages, setMessages] = useState<Message[]>([
@@ -30,6 +37,8 @@ const ChatPanel = ({ expert, chatRef }: ChatPanelProps) => {
   const [showCta, setShowCta] = useState(false);
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [budget, setBudget] = useState<string>("");
+  const [serviceInterest, setServiceInterest] = useState<string>("");
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -52,7 +61,45 @@ const ChatPanel = ({ expert, chatRef }: ChatPanelProps) => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleSendMessage = () => {
+  // Function to generate AI response based on expert personality
+  const generateAIResponse = async (userQuery: string) => {
+    try {
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer YOUR_OPENAI_API_KEY'  // This should be stored securely
+        },
+        body: JSON.stringify({
+          model: 'gpt-4',
+          messages: [
+            {
+              role: 'system',
+              content: `You are ${expert.name}, ${expert.role}. ${expert.bio} Respond in a ${expert.tone} tone. Keep responses under 150 words and focused on your area of expertise.`
+            },
+            {
+              role: 'user',
+              content: userQuery
+            }
+          ],
+          temperature: 0.7,
+          max_tokens: 200
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get AI response');
+      }
+
+      const data = await response.json();
+      return data.choices[0].message.content;
+    } catch (error) {
+      console.error('Error generating AI response:', error);
+      return expert.sampleAnswer; // Fallback to sample answer
+    }
+  };
+
+  const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
 
     // Add user message
@@ -72,31 +119,28 @@ const ChatPanel = ({ expert, chatRef }: ChatPanelProps) => {
       chatRef.current.scrollIntoView({ behavior: "smooth" });
     }
 
-    // Simulate expert typing
-    setTimeout(() => {
-      let response: Message;
+    // Generate AI response or use sample answer
+    setTimeout(async () => {
+      let responseText: string;
       
-      // If it's the first question, use sample answer
+      // If it's the first question, use AI response or sample answer as fallback
       if (messages.length === 1) {
-        response = {
-          id: uuidv4(),
-          sender: "expert",
-          text: expert.sampleAnswer,
-          timestamp: new Date(),
-        };
+        responseText = await generateAIResponse(userMessage.text);
         
         // Show CTA after first answer
         setTimeout(() => setShowCta(true), 1000);
       } else {
-        // For subsequent questions, provide a fallback response
-        response = {
-          id: uuidv4(),
-          sender: "expert",
-          text: `Thanks for your follow-up question! This simulated conversation has a limited scope. For a real consultation with the EchoSpark team, please provide your email below.`,
-          timestamp: new Date(),
-        };
+        // For subsequent questions, provide a limited response encouraging email submission
+        responseText = `Thanks for your follow-up question! This simulated conversation has a limited scope. For a real consultation with the EchoSpark team, please provide your email below.`;
         setShowCta(true);
       }
+      
+      const response: Message = {
+        id: uuidv4(),
+        sender: "expert",
+        text: responseText,
+        timestamp: new Date(),
+      };
       
       setMessages(prev => [...prev, response]);
       setIsTyping(false);
@@ -109,7 +153,7 @@ const ChatPanel = ({ expert, chatRef }: ChatPanelProps) => {
     }
   };
 
-  const handleSubmitEmail = () => {
+  const handleSubmitEmail = async () => {
     // Simple email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
@@ -117,9 +161,29 @@ const ChatPanel = ({ expert, chatRef }: ChatPanelProps) => {
       return;
     }
 
-    // Here you would normally send this to your backend
-    setSubmitted(true);
-    toast.success("Thanks for your interest! We'll be in touch soon.");
+    try {
+      // Submit data to Supabase
+      const { error } = await supabase
+        .from('inquiries')
+        .insert([
+          { 
+            email, 
+            expert_name: expert.name, 
+            conversation: messages,
+            service_interest: serviceInterest,
+            budget: budget,
+            timestamp: new Date()
+          }
+        ]);
+      
+      if (error) throw error;
+      
+      setSubmitted(true);
+      toast.success("Thanks for your interest! We'll be in touch soon.");
+    } catch (error) {
+      console.error("Error submitting inquiry:", error);
+      toast.error("There was an error submitting your request. Please try again.");
+    }
   };
 
   return (
@@ -226,7 +290,7 @@ const ChatPanel = ({ expert, chatRef }: ChatPanelProps) => {
                           <h4 className="text-white font-semibold text-lg mb-2">Talk to the real EchoSpark team</h4>
                           <p className="text-white/70 text-sm mb-4">{expert.cta}</p>
                           
-                          <div className="flex gap-2">
+                          <div className="space-y-4">
                             <Input
                               type="email"
                               placeholder="Your email"
@@ -234,11 +298,42 @@ const ChatPanel = ({ expert, chatRef }: ChatPanelProps) => {
                               onChange={(e) => setEmail(e.target.value)}
                               className="bg-echo-muted/20 text-white border-echo-muted/30 focus:border-echo-secondary/50 focus:ring-1 focus:ring-echo-secondary/50"
                             />
+                            
+                            <div>
+                              <label className="block text-white text-sm mb-2">What are you interested in?</label>
+                              <select
+                                value={serviceInterest}
+                                onChange={(e) => setServiceInterest(e.target.value)}
+                                className="w-full bg-echo-muted/20 text-white border-echo-muted/30 focus:border-echo-secondary/50 focus:ring-1 focus:ring-echo-secondary/50 rounded-md p-2"
+                              >
+                                <option value="">Select an option</option>
+                                <option value="AI Development">AI Development</option>
+                                <option value="Strategic Guidance">Strategic Guidance</option>
+                                <option value="Consulting">Consulting</option>
+                                <option value="Advertising">Advertising</option>
+                                <option value="Creator Economy">Creator Economy</option>
+                              </select>
+                            </div>
+
+                            <div>
+                              <label className="block text-white text-sm mb-2">Estimated Budget</label>
+                              <select
+                                value={budget}
+                                onChange={(e) => setBudget(e.target.value)}
+                                className="w-full bg-echo-muted/20 text-white border-echo-muted/30 focus:border-echo-secondary/50 focus:ring-1 focus:ring-echo-secondary/50 rounded-md p-2"
+                              >
+                                <option value="">Select a budget range</option>
+                                <option value="$10K">$10,000</option>
+                                <option value="$25K">$25,000</option>
+                                <option value="$50K+">$50,000+</option>
+                              </select>
+                            </div>
+
                             <Button 
                               onClick={handleSubmitEmail} 
-                              className="bg-echo-secondary text-echo-dark hover:bg-echo-secondary/90 font-medium"
+                              className="w-full bg-echo-secondary text-echo-dark hover:bg-echo-secondary/90 font-medium"
                             >
-                              Send
+                              Submit Request
                             </Button>
                           </div>
                         </div>
@@ -287,7 +382,7 @@ const ChatPanel = ({ expert, chatRef }: ChatPanelProps) => {
             </div>
 
             <div className="mt-3 text-center">
-              <p className="text-white/50 text-xs">This is a simulated conversation with a fictional EchoSpark expert</p>
+              <p className="text-white/50 text-xs">Ask any question related to {expert.role.toLowerCase()}</p>
             </div>
           </div>
         </motion.div>

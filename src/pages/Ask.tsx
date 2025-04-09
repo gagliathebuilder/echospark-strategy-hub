@@ -42,7 +42,7 @@ const Ask = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Ask EchoSpark - Strategic Insights from AI Experts" />
         <meta name="twitter:description" content="Chat with AI-powered expert personas in AI strategy, creator economy, ad tech, and digital transformation." />
-        <meta name="keywords" content="AI strategy, creator economy, ad tech, digital transformation, expert advice, strategic consulting, EchoSpark" />
+        <meta name="keywords" content="AI strategy, creator economy, ad tech, digital transformation, expert advice, strategic consulting, EchoSpark, AI development, AI implementation" />
       </Helmet>
       
       <div className="min-h-screen flex flex-col bg-echo-dark">
