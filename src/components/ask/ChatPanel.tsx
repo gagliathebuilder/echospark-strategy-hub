@@ -1,9 +1,10 @@
 
-import { useState, RefObject } from "react";
+import { useState, RefObject, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Expert, Message } from "@/types/expert";
 import { v4 as uuidv4 } from 'uuid';
 import { generateAIResponse } from "@/utils/aiService";
+import { toast } from "@/components/ui/use-toast";
 
 // Import refactored components
 import ChatHeader from "./chat/ChatHeader";
@@ -29,7 +30,7 @@ const ChatPanel = ({ expert, chatRef }: ChatPanelProps) => {
   const [submitted, setSubmitted] = useState(false);
   
   // Reset chat when expert changes
-  useState(() => {
+  useEffect(() => {
     setMessages([
       {
         id: uuidv4(),
@@ -40,7 +41,7 @@ const ChatPanel = ({ expert, chatRef }: ChatPanelProps) => {
     ]);
     setShowCta(false);
     setSubmitted(false);
-  });
+  }, [expert]);
 
   const handleSendMessage = async (inputValue: string) => {
     // Add user message
@@ -59,21 +60,9 @@ const ChatPanel = ({ expert, chatRef }: ChatPanelProps) => {
       chatRef.current.scrollIntoView({ behavior: "smooth" });
     }
 
-    // Generate AI response or use sample answer
-    setTimeout(async () => {
-      let responseText: string;
-      
-      // If it's the first question, use AI response or sample answer as fallback
-      if (messages.length === 1) {
-        responseText = await generateAIResponse(expert, userMessage.text);
-        
-        // Show CTA after first answer
-        setTimeout(() => setShowCta(true), 1000);
-      } else {
-        // For subsequent questions, provide a limited response encouraging email submission
-        responseText = `Thanks for your follow-up question! This simulated conversation has a limited scope. For a real consultation with the EchoSpark team, please provide your email below.`;
-        setShowCta(true);
-      }
+    try {
+      // Generate AI response
+      const responseText = await generateAIResponse(expert, inputValue);
       
       const response: Message = {
         id: uuidv4(),
@@ -83,8 +72,21 @@ const ChatPanel = ({ expert, chatRef }: ChatPanelProps) => {
       };
       
       setMessages(prev => [...prev, response]);
+      
+      // Show CTA after first answer if not already shown
+      if (!showCta) {
+        setTimeout(() => setShowCta(true), 1000);
+      }
+    } catch (error) {
+      console.error("Error in chat response:", error);
+      toast({
+        title: "Error",
+        description: "Unable to get a response. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
       setIsTyping(false);
-    }, 1500);
+    }
   };
 
   const handleSubmitCta = () => {

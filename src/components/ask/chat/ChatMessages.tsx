@@ -30,21 +30,25 @@ const ChatMessages = ({
   onSubmitCta 
 }: ChatMessagesProps) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   // Scroll to bottom when messages change
   useEffect(() => {
     if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+      // Small delay to ensure content is rendered before scrolling
+      setTimeout(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+      }, 100);
     }
   }, [messages, isTyping, showCta, submitted]);
 
   return (
-    <ScrollArea className="h-[450px] flex-grow">
+    <ScrollArea className="h-[450px] flex-grow" ref={scrollAreaRef}>
       <div className="p-6 flex flex-col space-y-6">
-        <AnimatePresence>
+        <AnimatePresence mode="popLayout">
           {messages.map((message) => (
             <ChatMessage 
-              key={message.id} 
+              key={`message-${message.id}`} 
               message={message} 
               expertName={expertName} 
               expertAvatar={expertAvatar} 
@@ -67,9 +71,8 @@ const ChatMessages = ({
 
           {/* Thank you message after CTA submission */}
           {submitted && <ThankYouMessage />}
-          
-          <div ref={messagesEndRef} />
         </AnimatePresence>
+        <div ref={messagesEndRef} className="h-1" />
       </div>
     </ScrollArea>
   );

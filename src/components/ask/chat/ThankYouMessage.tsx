@@ -7,6 +7,7 @@ const ThankYouMessage = () => {
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
       className="flex justify-start"
     >
       <div className="max-w-[85%] bg-gradient-to-br from-green-500/20 to-echo-secondary/20 text-white rounded-2xl p-5 border border-green-500/30 shadow-md">
