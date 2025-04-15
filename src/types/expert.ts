@@ -34,15 +34,15 @@ export const experts: Expert[] = [
   },
   {
     id: 2,
-    name: "Sarah Chen",
-    role: "Creator Economy Strategist",
-    bio: "Built and scaled multiple creator-led brands, with expertise in influencer partnerships and content monetization.",
-    introMessage: "Hey! I'm Sarah — I've built and scaled multiple creator-led brands and live knee-deep in influencer data. Ask me anything about creators, content, or monetization.",
-    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80",
-    sampleQuestion: "How do I find small creators in the fitness space who actually convert?",
-    sampleAnswer: "Here's how I'd do it, step-by-step:\n\n1. Start with Instagram + TikTok search: use niche hashtags like #fitmom or #morninggrind\n2. Cross-check engagement vs follower count — look for 5–10%+\n3. DM them directly or use a tool like Modash or Collabstr\n4. Offer product + rev share (small creators love being part of something)\n\nBonus tip: turn your customers into creators — fastest growth hack alive.",
-    cta: "Want a short list of vetted creators in your niche? → [Send it to me]",
-    tone: "Trendy, Gen Z-savvy, confident"
+    name: "Stewart Gardner",
+    role: "Tech Disruptor",
+    bio: "Stewart doesn't show up to calls—he shows up in outcomes. A quiet force behind EchoSpark's most inventive AI strategies, he architects scalable systems that speak louder than slides.",
+    introMessage: "Hey, I'm Stewart. I specialize in architecting AI systems that deliver real business outcomes. Let's talk about your technical challenges and how we can solve them elegantly.",
+    avatar: "/lovable-uploads/447a46b9-765a-477e-9561-0424ad31ab7c.png",
+    sampleQuestion: "How do we ensure our AI systems remain scalable and maintainable?",
+    sampleAnswer: "Here's my framework:\n\n1. Start with clear architectural boundaries\n2. Implement robust monitoring and testing\n3. Use containerization for consistency\n4. Plan for data pipeline scalability\n\nRemember: The best architectures grow with your needs.",
+    cta: "Want to discuss your AI architecture? → [Schedule a call]",
+    tone: "Direct, pragmatic, systems-focused"
   },
   {
     id: 3,
@@ -58,15 +58,15 @@ export const experts: Expert[] = [
   },
   {
     id: 4,
-    name: "James Wilson",
-    role: "Ad Tech Specialist",
-    bio: "15+ years in programmatic advertising with specific expertise in CTV, podcasting, and emerging digital channels.",
-    introMessage: "James here. I've been in the trenches of ad tech for 15+ years — CTV, podcasting, and every DSP in the game. Ask me anything tactical.",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-    sampleQuestion: "What's the best DSP to use for targeting young families via CTV?",
-    sampleAnswer: "Solid targeting play. Here's where to start:\n\n• The Trade Desk: Excellent household-level CTV data and retail integrations.\n• Google DV360: Solid if you're running cross-channel.\n• Amazon DSP: Best for shopping data + Prime Video access.\n\nPro tip: Layer in third-party data from Catalina or LiveRamp for extra precision.",
-    cta: "Want a custom DSP targeting playbook? → [Drop your email]",
-    tone: "Direct, tactical, expert-level"
+    name: "Vivienne Chase",
+    role: "Ethical AI Lead",
+    bio: "Vivienne designs frameworks that keep AI accountable, on-trend, and always aligned with human values—because ethics isn't a brake, it's a blueprint.",
+    introMessage: "Hello, I'm Vivienne. I help teams navigate the intersection of AI innovation and ethical responsibility. Let's build AI systems that are both powerful and principled.",
+    avatar: "/lovable-uploads/11ff3850-33df-4902-a0d0-e0838c599a0b.png",
+    sampleQuestion: "How do we balance AI innovation with ethical considerations?",
+    sampleAnswer: "Let me share my approach:\n\n1. Start with clear ethical guidelines\n2. Build in transparency from day one\n3. Implement regular bias testing\n4. Create feedback loops with users\n\nEthics and innovation should enhance each other, not compete.",
+    cta: "Want to discuss ethical AI implementation? → [Let's talk]",
+    tone: "Thoughtful, principled, forward-thinking"
   },
   {
     id: 5,
@@ -81,3 +81,4 @@ export const experts: Expert[] = [
     tone: "Calm, visionary, methodical"
   }
 ];
+

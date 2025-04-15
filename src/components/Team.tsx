@@ -18,24 +18,24 @@ const Team = () => {
     },
     {
       id: 2,
-      name: "Chris Gaglia",
-      role: "Ad Tech & AI Innovator",
-      bio: "Product-driven leader in CTV, Mobile, and Influencer monetization. Now building next-gen AI solutions.",
-      image: "/lovable-uploads/40856c6c-c20e-464c-ab96-d1d60c3df798.png",
-      delay: 0.2
-    },
-    {
-      id: 3,
       name: "Stewart Gardner",
       role: "Tech Disruptor",
       bio: "Stewart doesn't show up to calls—he shows up in outcomes. A quiet force behind EchoSpark's most inventive AI strategies, he architects scalable systems that speak louder than slides.",
       image: "/lovable-uploads/447a46b9-765a-477e-9561-0424ad31ab7c.png",
+      delay: 0.2
+    },
+    {
+      id: 3,
+      name: "Chris Gaglia",
+      role: "Ad Tech & AI Innovator",
+      bio: "Product-driven leader in CTV, Mobile, and Influencer monetization. Now building next-gen AI solutions.",
+      image: "/lovable-uploads/40856c6c-c20e-464c-ab96-d1d60c3df798.png",
       delay: 0.3
     },
     {
       id: 4,
       name: "Vivienne Chase",
-      role: "Ethical AI Lead",
+      role: "Ethical AI Lead", 
       bio: "Vivienne designs frameworks that keep AI accountable, on-trend, and always aligned with human values—because ethics isn't a brake, it's a blueprint.",
       image: "/lovable-uploads/11ff3850-33df-4902-a0d0-e0838c599a0b.png",
       delay: 0.4
