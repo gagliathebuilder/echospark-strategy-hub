@@ -8,6 +8,7 @@ import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import Ask from "./pages/Ask";
 import NotFound from "./pages/NotFound";
+import Careers from "./pages/Careers"; // Import the Careers component
 
 // Add framer-motion for animations
 import { motion, AnimatePresence } from "framer-motion";

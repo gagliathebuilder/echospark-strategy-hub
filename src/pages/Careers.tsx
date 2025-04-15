@@ -1,10 +1,11 @@
 
 import { motion } from "framer-motion";
 import { Mail, Upload } from "lucide-react";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Helmet } from "react-helmet-async";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const jobListings = [
   {
@@ -79,6 +80,8 @@ const Careers = () => {
         <title>Careers at EchoSpark - Join Our AI Innovation Team</title>
         <meta name="description" content="Join EchoSpark and be part of a team shaping the future of AI in advertising and media technology." />
       </Helmet>
+
+      <Navbar />
 
       <section className="pt-32 pb-24">
         <div className="echo-container">
@@ -169,6 +172,8 @@ const Careers = () => {
           </div>
         </div>
       </section>
+      
+      <Footer />
     </div>
   );
 };
