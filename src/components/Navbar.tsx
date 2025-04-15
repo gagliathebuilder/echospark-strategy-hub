@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -11,6 +12,7 @@ const Navbar = () => {
     { name: "Services", href: "#services" },
     { name: "Team", href: "#team" },
     { name: "Case Studies", href: "#case-studies" },
+    { name: "Careers", href: "/careers" },
     { name: "Contact", href: "#contact" },
   ];
 

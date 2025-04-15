@@ -18,26 +18,26 @@ const Team = () => {
     },
     {
       id: 2,
-      name: "Sarah Chen",
-      role: "Creator Economy Strategist",
-      bio: "Built and scaled multiple creator-led brands, with expertise in influencer partnerships and content monetization.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80",
-      delay: 0.2
-    },
-    {
-      id: 3,
       name: "Chris Gaglia",
       role: "Ad Tech & AI Innovator",
       bio: "Product-driven leader in CTV, Mobile, and Influencer monetization. Now building next-gen AI solutions.",
       image: "/lovable-uploads/40856c6c-c20e-464c-ab96-d1d60c3df798.png",
+      delay: 0.2
+    },
+    {
+      id: 3,
+      name: "Stewart Gardner",
+      role: "Tech Disruptor",
+      bio: "Stewart doesn't show up to calls—he shows up in outcomes. A quiet force behind EchoSpark's most inventive AI strategies, he architects scalable systems that speak louder than slides.",
+      image: "/lovable-uploads/447a46b9-765a-477e-9561-0424ad31ab7c.png",
       delay: 0.3
     },
     {
       id: 4,
-      name: "James Wilson",
-      role: "Ad Tech Specialist",
-      bio: "15+ years in programmatic advertising with specific expertise in CTV, podcasting, and emerging digital channels.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      name: "Vivienne Chase",
+      role: "Ethical AI Lead",
+      bio: "Vivienne designs frameworks that keep AI accountable, on-trend, and always aligned with human values—because ethics isn't a brake, it's a blueprint.",
+      image: "/lovable-uploads/11ff3850-33df-4902-a0d0-e0838c599a0b.png",
       delay: 0.4
     },
     {
