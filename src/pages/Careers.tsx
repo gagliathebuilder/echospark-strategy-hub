@@ -164,18 +164,18 @@ const Careers = () => {
 
                       <div className="flex flex-col sm:flex-row gap-4 pt-4">
                         <Button 
-                          className="button-echo-primary"
+                          className="button-echo-primary flex items-center justify-center gap-2"
                           onClick={() => window.location.href = "mailto:info@echospark.io"}
                         >
-                          <Mail className="w-4 h-4 mr-2" />
+                          <Mail className="w-4 h-4" />
                           Apply via Email
                         </Button>
                         <Button 
                           variant="outline" 
-                          className="button-echo-outline"
+                          className="button-echo-outline flex items-center justify-center gap-2"
                           onClick={() => alert("Resume upload functionality will be implemented soon!")}
                         >
-                          <Upload className="w-4 h-4 mr-2" />
+                          <Upload className="w-4 h-4" />
                           Upload Resume
                         </Button>
                       </div>
@@ -194,4 +194,3 @@ const Careers = () => {
 };
 
 export default Careers;
-

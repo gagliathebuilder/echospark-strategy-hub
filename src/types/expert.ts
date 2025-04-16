@@ -81,4 +81,3 @@ export const experts: Expert[] = [
     tone: "Calm, visionary, methodical"
   }
 ];
-
