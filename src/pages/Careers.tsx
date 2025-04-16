@@ -122,12 +122,12 @@ const Careers = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-white/70 mb-6">{job.description}</p>
+                    <p className="text-white/90 mb-6">{job.description}</p>
                     
                     <div className="space-y-6">
                       <div>
                         <h4 className="text-lg font-semibold text-white mb-3">What You'll Do</h4>
-                        <ul className="list-disc list-inside space-y-2 text-white/70">
+                        <ul className="list-disc list-inside space-y-2 text-white/90">
                           {job.responsibilities.map((item, i) => (
                             <li key={i}>{item}</li>
                           ))}
@@ -136,7 +136,7 @@ const Careers = () => {
                       
                       <div>
                         <h4 className="text-lg font-semibold text-white mb-3">What We're Looking For</h4>
-                        <ul className="list-disc list-inside space-y-2 text-white/70">
+                        <ul className="list-disc list-inside space-y-2 text-white/90">
                           {job.requirements.map((item, i) => (
                             <li key={i}>{item}</li>
                           ))}
@@ -145,7 +145,7 @@ const Careers = () => {
 
                       <div>
                         <h4 className="text-lg font-semibold text-white mb-3">How to Apply</h4>
-                        <p className="text-white/70">{job.howToApply}</p>
+                        <p className="text-white/90">{job.howToApply}</p>
                       </div>
 
                       <div>
@@ -154,7 +154,7 @@ const Careers = () => {
                           {job.tags.map((tag, i) => (
                             <span
                               key={i}
-                              className="px-3 py-1 rounded-full text-sm bg-echo-muted/10 text-white/70"
+                              className="px-3 py-1 rounded-full text-sm bg-echo-muted/10 text-white/90"
                             >
                               {tag}
                             </span>
