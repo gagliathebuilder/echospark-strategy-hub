@@ -78,7 +78,7 @@ const Careers = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-echo-dark/95 to-echo-dark/90">
+    <div className="min-h-screen bg-white">
       <Helmet>
         <title>Careers at EchoSpark - Join Our AI Innovation Team</title>
         <meta name="description" content="Join EchoSpark and be part of a team shaping the future of AI in advertising and media technology." />
@@ -94,10 +94,10 @@ const Careers = () => {
             transition={{ duration: 0.5 }}
             className="text-center mb-16"
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Join Our <span className="text-gradient">Innovation Team</span>
+            <h1 className="text-4xl md:text-5xl font-bold text-black mb-6">
+              Join Our <span className="text-echo-primary">Innovation Team</span>
             </h1>
-            <p className="text-lg text-white/70 max-w-2xl mx-auto">
+            <p className="text-lg text-black/90 max-w-2xl mx-auto">
               We're looking for exceptional talent to help shape the future of AI in advertising and media technology. If you're passionate about innovation and ready to make an impact, we want to hear from you.
             </p>
           </motion.div>
@@ -110,11 +110,11 @@ const Careers = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <Card className="glass-card-dark overflow-hidden">
+                <Card>
                   <CardHeader>
                     <CardTitle className="flex items-start justify-between">
                       <div>
-                        <h3 className="text-2xl text-white mb-2">{job.title}</h3>
+                        <h3 className="text-2xl text-black mb-2">{job.title}</h3>
                         <span className="inline-block px-3 py-1 rounded-full text-sm font-medium bg-echo-primary/20 text-echo-primary">
                           {job.type}
                         </span>
@@ -122,12 +122,12 @@ const Careers = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-white/90 mb-6">{job.description}</p>
+                    <p className="text-black/90 mb-6">{job.description}</p>
                     
                     <div className="space-y-6">
                       <div>
-                        <h4 className="text-lg font-semibold text-white mb-3">What You'll Do</h4>
-                        <ul className="list-disc list-inside space-y-2 text-white/90">
+                        <h4 className="text-lg font-semibold text-black mb-3">What You'll Do</h4>
+                        <ul className="list-disc list-inside space-y-2 text-black/90">
                           {job.responsibilities.map((item, i) => (
                             <li key={i}>{item}</li>
                           ))}
@@ -135,8 +135,8 @@ const Careers = () => {
                       </div>
                       
                       <div>
-                        <h4 className="text-lg font-semibold text-white mb-3">What We're Looking For</h4>
-                        <ul className="list-disc list-inside space-y-2 text-white/90">
+                        <h4 className="text-lg font-semibold text-black mb-3">What We're Looking For</h4>
+                        <ul className="list-disc list-inside space-y-2 text-black/90">
                           {job.requirements.map((item, i) => (
                             <li key={i}>{item}</li>
                           ))}
@@ -144,17 +144,17 @@ const Careers = () => {
                       </div>
 
                       <div>
-                        <h4 className="text-lg font-semibold text-white mb-3">How to Apply</h4>
-                        <p className="text-white/90">{job.howToApply}</p>
+                        <h4 className="text-lg font-semibold text-black mb-3">How to Apply</h4>
+                        <p className="text-black/90">{job.howToApply}</p>
                       </div>
 
                       <div>
-                        <h4 className="text-lg font-semibold text-white mb-3">Keywords</h4>
+                        <h4 className="text-lg font-semibold text-black mb-3">Keywords</h4>
                         <div className="flex flex-wrap gap-2">
                           {job.tags.map((tag, i) => (
                             <span
                               key={i}
-                              className="px-3 py-1 rounded-full text-sm bg-echo-muted/10 text-white/90"
+                              className="px-3 py-1 rounded-full text-sm bg-echo-primary/10 text-black/90"
                             >
                               {tag}
                             </span>
