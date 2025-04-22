@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Wand2, Zap, Globe, Sparkles, Users, BarChart3, Bot, Cpu, Brain } from "lucide-react";
@@ -5,7 +6,7 @@ import HoverEffectCard from "./ui/hover-effect-card";
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const phrases = ["ethically", "emotionally", "intelligently"];
+  const phrases = ["AI Solutions", "Creator's Economy", "Ad Tech"];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -14,6 +15,7 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Solution cards with hover content
   const solutions = [
     {
       title: "AI Solutions",
@@ -103,6 +105,7 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center items-center pt-20 overflow-hidden bg-echo-dark">
+      {/* Background Elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-20 left-0 w-96 h-96 bg-echo-primary/30 rounded-full filter blur-[120px] opacity-20 animate-float"></div>
         <div className="absolute bottom-20 right-0 w-96 h-96 bg-echo-secondary/30 rounded-full filter blur-[120px] opacity-20 animate-float" style={{ animationDelay: "2s" }}></div>
@@ -117,7 +120,7 @@ const Hero = () => {
           className="inline-flex items-center px-3 py-1 mb-8 rounded-full bg-echo-muted/30 border border-echo-muted/20 backdrop-blur-sm"
         >
           <span className="animate-pulse mr-2 h-2 w-2 rounded-full bg-echo-secondary"></span>
-          <span className="text-xs font-medium text-white/80">Humanizing AI Technology</span>
+          <span className="text-xs font-medium text-white/80">AI-Powered Business Transformation</span>
         </motion.div>
 
         <motion.h1
@@ -126,7 +129,7 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-5xl md:text-7xl font-bold mb-6 text-white tracking-tight max-w-4xl text-balance"
         >
-          Where Culture Meets Code
+          Strategic Solutions for the
           <div className="inline-block mx-2 relative">
             <span className="invisible">{phrases.reduce((a, b) => a.length > b.length ? a : b)}</span>
             {phrases.map((phrase, index) => (
@@ -141,7 +144,7 @@ const Hero = () => {
             ))}
           </div>
           <br />
-          Designing AI that behaves
+          Future
         </motion.h1>
 
         <motion.p
@@ -150,11 +153,11 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="text-lg md:text-xl text-white/70 mb-10 max-w-2xl text-balance"
         >
-          We don't just build AI. We shape how it behaves.
-          <br />
-          From media to machines, we engineer culture into code.
+          We help businesses leverage AI to automate processes, enhance team capabilities, 
+          and create competitive advantages through custom AI solutions and strategic implementation.
         </motion.p>
 
+        {/* AI Integration USP Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
