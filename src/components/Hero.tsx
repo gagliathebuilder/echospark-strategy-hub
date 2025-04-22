@@ -5,7 +5,7 @@ import HoverEffectCard from "./ui/hover-effect-card";
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const phrases = ["Culture", "Code", "Consciousness"];
+  const phrases = ["ethically", "emotionally", "intelligently"];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -126,7 +126,7 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-5xl md:text-7xl font-bold mb-6 text-white tracking-tight max-w-4xl text-balance"
         >
-          Where 
+          Where Culture Meets Code
           <div className="inline-block mx-2 relative">
             <span className="invisible">{phrases.reduce((a, b) => a.length > b.length ? a : b)}</span>
             {phrases.map((phrase, index) => (
@@ -141,7 +141,7 @@ const Hero = () => {
             ))}
           </div>
           <br />
-          Meets Code
+          Designing AI that behaves
         </motion.h1>
 
         <motion.p
@@ -150,10 +150,9 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="text-lg md:text-xl text-white/70 mb-10 max-w-2xl text-balance"
         >
-          We help brands, creators, and platforms build intelligent systems that reflect human values, 
-          resonate emotionally, and evolve with cultural momentum.
+          We don't just build AI. We shape how it behaves.
           <br />
-          From AdTech to interface design, we humanize AI from the inside out.
+          From media to machines, we engineer culture into code.
         </motion.p>
 
         <motion.div
